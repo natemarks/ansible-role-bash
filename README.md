@@ -48,7 +48,7 @@ NOTE: After you run the role, close gnome terminal completely to see powerline
 It can be installed using the ansible-galaxy command:
 ```shell
 # Install from command line:
-ansible-galaxy install git+https://github.com/natemarks/ansible-role-bash.git,v0.0.33
+ansible-galaxy install git+https://github.com/natemarks/ansible-role-bash.git,v0.0.34
 ansible-galaxy install git+https://github.com/natemarks/ansible-role-bash.git,main
 ```
 ## Run the role from a playbook
