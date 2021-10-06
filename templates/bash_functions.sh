@@ -52,3 +52,15 @@ function gwbdiff() {
   printf "Comparing %s to %s" "${W_FILE}" "${T_FILE}"
   vim -d "${W_FILE}" "${T_FILE}"
 }
+
+ssmconnect() {
+  aws ssm start-session --target "${1}"
+}
+
+pathinsert() {
+  export PATH="${1}":$PATH
+}
+
+pathappemd() {
+  export PATH=$PATH:"${1}"
+}
