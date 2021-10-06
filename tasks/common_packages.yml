@@ -4,6 +4,7 @@
   apt:
     pkg:
       - git
+      - tree
       - make
       - wget
       - curl

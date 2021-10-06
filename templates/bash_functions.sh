@@ -37,3 +37,18 @@ function complete-alias  {
     make-completion-wrapper "${EXISTING_COMPLETION_FN}" "${AUTOGEN_COMPLETION_FN}" "${*}"
     complete -F "${AUTOGEN_COMPLETION_FN}" "${ALIAS}"
 }
+
+# gwbdiff -  git working - branch diff
+# compare file in git working directory to the same file in another branch
+# write the branch file to a temp file
+function gwbdiff() {
+  local T_FILE
+  local BRANCH
+  local W_FILE
+  T_FILE="$(mktemp)"
+  BRANCH="${1}"
+  W_FILE="${2}"
+  git show "${BRANCH}":"${W_FILE}" > "${T_FILE}"
+  printf "Comparing %s to %s" "${W_FILE}" "${T_FILE}"
+  vim -d "${W_FILE}" "${T_FILE}"
+}
