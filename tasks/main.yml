@@ -1,0 +1,4 @@
+---
+- include_tasks: common_packages.yml
+- include_tasks: bash.yml
+- include_tasks: powerline.yml

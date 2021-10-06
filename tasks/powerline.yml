@@ -1,0 +1,49 @@
+---
+- name: PIP3 install powerline modules for Python3
+  pip:
+    name:
+      - powerline-status
+      - powerline-gitstatus
+    executable: pip3
+
+- name: get powerline installation location
+  args:
+    executable: /usr/bin/bash
+  shell: |
+    set -euo pipefail
+    pip show powerline-status | grep Location | awk '{print $2}'
+  register: powerline_location
+  changed_when: powerline_location.rc != 0
+
+- name: Deploy HOME/bashrc.d/bash_powerline.sh
+  ansible.builtin.template:
+    src: templates/bash_powerline.sh
+    dest: '~/bashrc.d/bash_powerline.sh'
+    mode: '0644'
+    backup: true
+
+- name: Create HOME/.config/powerline/colorschemes
+  ansible.builtin.file:
+    path: '~/.config/powerline/colorschemes'
+    state: directory
+    mode: '0755'
+
+- name: Create HOME/.config/powerline/themes/shell
+  ansible.builtin.file:
+    path: '~/.config/powerline/themes/shell'
+    state: directory
+    mode: '0755'
+
+- name: Deploy powerline colorschemes/default.json
+  ansible.builtin.template:
+    src: templates/colorschemes_default.json
+    dest: '~/.config/powerline/colorschemes/default.json'
+    mode: '0644'
+    backup: true
+
+- name: Deploy powerline themes/shell/default.json
+  ansible.builtin.template:
+    src: templates/themes_shell_default.json
+    dest: '~/.config/powerline/themes/shell/default.json'
+    mode: '0644'
+    backup: true

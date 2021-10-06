@@ -1,0 +1,8 @@
+---
+- name: Configure bash
+  become: false
+  hosts: localhost
+  gather_facts: true
+  connection: local
+  roles:
+    - ansible-role-bash 

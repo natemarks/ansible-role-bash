@@ -1,0 +1,65 @@
+---
+- name: Create HOME/bashrc.d
+  ansible.builtin.file:
+    path: '~/bashrc.d'
+    state: directory
+    mode: '0755'
+
+- name: Create HOME/commonrc.d
+  ansible.builtin.file:
+    path: '~/commonrc.d'
+    state: directory
+    mode: '0755'
+
+- name: Create HOME/bin
+  ansible.builtin.file:
+    path: '~/bin'
+    state: directory
+    mode: '0755'
+
+- name: Create HOME/.bashrc.local
+  ansible.builtin.template:
+    src: templates/bashrc.local
+    dest: '~/.bashrc.local'
+    mode: '0644'
+    backup: true
+
+- name: Deploy HOME/bashrc.d/aliases.sh
+  ansible.builtin.template:
+    src: templates/aliases.sh
+    dest: '~/bashrc.d/aliases.sh'
+    mode: '0644'
+    backup: true
+
+- name: Deploy HOME/bashrc.d/add_home_bin_to_path.sh
+  ansible.builtin.template:
+    src: templates/add_home_bin_to_path.sh
+    dest: '~/commonrc.d/add_home_bin_to_path.sh'
+    mode: '0644'
+    backup: true
+
+- name: Deploy HOME/commonrc.d/common_functions.sh
+  ansible.builtin.template:
+    src: templates/common_functions.sh
+    dest: '~/commonrc.d/common_functions.sh'
+    mode: '0644'
+    backup: true
+
+- name: Deploy HOME/bashrc.d/bash_functions.sh
+  ansible.builtin.template:
+    src: templates/bash_functions.sh
+    dest: '~/bashrc.d/bash_functions.sh'
+    mode: '0644'
+    backup: true
+
+- name: Update bashrc to call bashrc.local
+  lineinfile:
+    dest: '~/.bashrc'
+    line: '. $HOME/.bashrc.local'
+
+- name: Deploy HOME/commonrc.d/ohmyzsh_git_aliases.sh
+  ansible.builtin.template:
+    src: templates/ohmyzsh_git_aliases.sh
+    dest: '~/commonrc.d/ohmyzsh_git_aliases.sh'
+    mode: '0644'
+    backup: true

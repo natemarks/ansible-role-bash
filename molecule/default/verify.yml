@@ -1,0 +1,10 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false # not sure what this does, but molecule test fails if true
+  tasks:
+    - name: Example assertion
+      assert:
+        that: true

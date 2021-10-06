@@ -1,0 +1,18 @@
+---
+- name: Install common shell packages
+  become: true
+  apt:
+    pkg:
+      - git
+      - make
+      - wget
+      - curl
+      - zip
+      - unzip
+      - fzf
+      - ripgrep
+      - silversearcher-ag
+      - jq
+      - fonts-powerline
+      - dconf-cli  # for gogh colors
+      - uuid-runtime  # for gogh colors
